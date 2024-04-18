@@ -18,8 +18,8 @@ const HeroCard = ({ trendingMovie }: { trendingMovie: Movie}) => {
         <h1 className="hero-title">{trendingMovie?.title || trendingMovie?.name}</h1>
         <p className="hero-overview">{trendingMovie?.overview}</p>   
         <div className="hero-btns">
-            <button><PlayCircleOutlineOutlined/> Play Now</button>
-            <button><InfoOutlined/> More info</button>
+            <button className="hero-btn"><PlayCircleOutlineOutlined/> Play Now</button>
+            <button className="hero-btn"><InfoOutlined/> More info</button>
         </div>
     </div>
   )
