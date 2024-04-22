@@ -4,6 +4,7 @@ import { Search } from '@mui/icons-material'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 
 const Navbar = () => {
     const router = useRouter();
@@ -25,6 +26,10 @@ const Navbar = () => {
 
         return () => window.removeEventListener("scroll", handleScroll)
     }, []);
+
+    const handleLogout = () => {
+        signOut({ callbackUrl: "/login"});
+    }
 
   return (
     <div className={`navbar ${isScrolled && "bg-black-1"}`}>
@@ -61,7 +66,7 @@ const Navbar = () => {
                 <div className='dropdown-menu'>
                     <Link href="/">Home</Link>
                     <Link href="/my-list">My List</Link>
-                    <a href="">Log Out</a>
+                    <a onClick={handleLogout}>Log Out</a>
                 </div>
             )}
         </div>
