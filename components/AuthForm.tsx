@@ -2,7 +2,9 @@
 
 import { EmailOutlined, LockOutlined, PersonOutline } from '@mui/icons-material'
 import Link from 'next/link'
-import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation';
+import { useForm, SubmitHandler } from 'react-hook-form'
+import toast from 'react-hot-toast';
 
 interface FormData {
   username?: string;
@@ -11,6 +13,7 @@ interface FormData {
 }
 
 const AuthForm = ({ type }: { type: "register" | "login" }) => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -22,8 +25,25 @@ const AuthForm = ({ type }: { type: "register" | "login" }) => {
         : { email: "", password: "" },
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    let res 
+
+    if(type === 'register') {
+      res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+
+      if (res.ok){
+        router.push("/login");
+      } else {
+        toast.error("Something went wrong");
+      }
+
+    }
   };
 
   return (
