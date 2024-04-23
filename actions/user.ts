@@ -4,19 +4,19 @@ import User from "@models/User"
 import { getServerSession } from "next-auth"
 
 export const fetchMyList = async () => {
-    const session = await getServerSession(options)
+  const session = await getServerSession(options)
 
-    if (!session?.user?.email) {
-        throw new Error("No user logged in")
-    }
+  if (!session?.user?.email) {
+    throw new Error("No user log in")
+  }
 
-    await connectToDB()
+  await connectToDB()
 
-    const user = await User.findOne({ email: session?.user?.email})
+  const user = await User.findOne({ email: session?.user?.email })
 
-    if(!user){
-        throw new Error("No user found")
-    }
+  if (!user) {
+    throw new Error("No user found")
+  }
 
-    return user.favorites
+  return user.favorites
 }

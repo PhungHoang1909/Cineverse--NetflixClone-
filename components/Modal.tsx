@@ -101,9 +101,7 @@ const Modal = ({ movie, closeModal }: Props) => {
     }
   };
   
-  return loading ? (
-    <Loader />
-  ) : (
+  return (
     <div className="modal">
       <button className="modal-close" onClick={closeModal}>
         <CancelRounded
